@@ -6,3 +6,283 @@ Medium green: #55c57a
 Dark green: #28b485
 
 */
+
+/* remove any browser inserted padding and margin*/
+* {
+  margin: 0;
+  padding: 0;
+  /* change the box model, so borders and paddings are not added to the total width or height*/
+  box-sizing: border-box;
+}
+
+body {
+  /* properties related to font are inherited (except input elements).
+       By setting fonts at the body level we pass them thru inheritance to children
+
+    */
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  /* default for most browsers */
+  font-size: 16px;
+
+  /* 1.7 times bigger than default */
+  line-height: 1.7;
+  color: #777;
+  padding: 30px;
+}
+
+.header {
+  /* 95% of the view port height */
+  height: 95vh;
+  /* technically, 2 images. radient at the top, hero at the bottom 
+  start gradient on the left top side and go to the right bottom
+  */
+  background-image: linear-gradient(
+      to right bottom,
+      /* make gradient transparent */ rgba(126, 213, 111, 0.8),
+      rgba(40, 180, 131, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* fit the element inside of the box whatever the view port is */
+  background-size: cover;
+  /* if shrinking the image from bottom or the browser, the top portion stays in view if top is selected,
+  bottom portion stays in view if bottom is selected */
+  background-position: top;
+
+  /* specify four corners starting (x, y) top/left, top/right, etc 
+  https://bennettfeely.com/clippy/ - resources for different shapes
+  */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+}
+
+.logo-box {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.logo {
+  /* width will be automatically calculated by the browser if height if specified
+    and vice versa */
+  height: 35px;
+}
+
+.text-box {
+  /* center the text */
+  position: absolute;
+  /* start text 50% from the parent element top (header is the element which has position: relative )*/
+  top: 40%;
+  /* start text 50% from the left from the parent element left*/
+  left: 50%;
+  /* after positioned as stated above, shift 50% to the top and left. relative to itself.
+  this concludes centering 
+  transform works relative to the element on which it is declared, not the parent */
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+
+  /* at the end of the animation this element slightly moves. To prevent this, use below rule */
+  /* during animation, if we rotate an element, at some point the back part will be shown. To prevent it,
+  use this rule. This is the primary use for this rule. In this specific case it just helps with extra shake */
+  backface-visibility: hidden;
+
+  margin-bottom: 60px;
+}
+
+.heading-primary-main {
+  /* by default span is inline element 
+       inline elements occupy only as much space as they need. Block elements occupy the entire width available and put 
+       line breaks at the end
+    */
+  display: block;
+  font-size: 60px;
+  font-weight: 400;
+  letter-spacing: 35px;
+  /* animation properties */
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+
+  /* wait 3 seconds before doing animation */
+  /* animation-delay: 3s; */
+
+  /* repeat animation 3 times */
+  /* animation-iteration-count: 3; */
+
+  /* speed at which animation takes place: 
+     ease-in: start slow, and speed up at the end
+     ease-out: start fast, finish slow.
+  */
+  animation-timing-function: ease-out;
+}
+
+.heading-primary-sub {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 17.4px;
+
+  animation-name: moveInRight;
+  animation-duration: 1s;
+}
+
+@keyframes moveInLeft {
+  /* when animation starts */
+  0% {
+    opacity: 0;
+    /* move it to the 100px to the left from current position */
+    transform: translateX(-100px);
+  }
+
+  /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
+  80% {
+    transform: translateX(10px);
+  }
+
+  /* when animation finishes */
+  100% {
+    opacity: 1;
+    /* at the end show it the way it looks without animation*/
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* when animation starts */
+  0% {
+    opacity: 0;
+    /* move it to the 100px to the left from current position */
+    transform: translateX(100px);
+  }
+
+  /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
+  80% {
+    transform: translateX(-10px);
+  }
+
+  /* when animation finishes */
+  100% {
+    opacity: 1;
+    /* at the end show it the way it looks without animation*/
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInBottom {
+  /* when animation starts */
+  0% {
+    opacity: 0;
+    /* move it to the 100px to the left from current position */
+    transform: translateY(100px);
+  }
+
+  /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
+  80% {
+    transform: translateY(-10px);
+  }
+
+  /* when animation finishes */
+  100% {
+    opacity: 1;
+    /* at the end show it the way it looks without animation*/
+    transform: translateY(0);
+  }
+}
+/* button is a link, so it has link's pseudo selectors */
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  /* need to be a block if we want to give inline element padding, height, width */
+  display: inline-block;
+  /* to center inline-block elements (they are treated as text) add text-align to the parent element*/
+
+  /* make button with rounded edges */
+  border-radius: 100px;
+
+  /* use transition to animate. Use all properties for animation */
+  /* transition property must be on the initial state, not on pseudo classes where it is visible */
+  transition: all 0.2s;
+
+  /* set position relative to hide the btn::after element */
+  position: relative;
+
+  /* move botton from bottom */
+  animation: moveInBottom 1s ease-out;
+}
+
+.btn:hover {
+  /* to move the button up (negative value) */
+  transform: translateY(-3px);
+
+  /* first arg is X, the second is Y, the third is blur value, fourth - color of the shadow and its opacity */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  /* when we click an element, it becomes active.
+  Move the element up 1px from initial position before any actions (0)
+  */
+  transform: translateY(-1px);
+
+  /* when we click on the button we want the shadow to look smaller and less blured*/
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777;
+}
+
+/* after pseudo element is treated as a child of the button */
+.btn::after {
+  /* create a copy of the button and put it behind the button.
+    When we hover out of the button, ... */
+
+  /* in order for after pseudo element to appear on the page, we must have content property. */
+  content: "";
+  display: inline-block;
+  /* 100% of the height and width of the button.  */
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  /* put the pseudo button right behind the main button, so it won't stick out. The parent should the .btn:link */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* really hide the button behind by setting z-index. Without it will appear in the front */
+  z-index: -1;
+
+  /* animate the button blow out. set time. Animation is always set on the original element,
+  which is ::after for the second button */
+  transition: all 0.4s;
+}
+
+/* make the copied pseudo element white */
+.btn-white::after {
+  background-color: #fff;
+}
+
+.btn:hover::after {
+  /* when we hover the button, we want to do something with the clone button behind */
+  /* after we hover the button increase the size ::after The blown out size is the pseudo element
+  that we hid behind the button*/
+  /* transform: scale(1.5); */
+  transform: scaleX(1.4) scaleY(1.6);
+
+  opacity: 0;
+}
+
+.btn-animated {
+  /* .75s - delay */
+  animation: moveInBottom 0.5s ease-out 0.75s;
+
+  /* @keyframe %0 styles will be applied to the animation before it starts */
+  animation-fill-mode: backwards;
+}
