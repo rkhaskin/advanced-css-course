@@ -7,12 +7,27 @@ Dark green: #28b485
 
 */
 
-/* remove any browser inserted padding and margin*/
-* {
+/* remove any browser inserted padding and margin
+automatically select all elements and all after and before pseudo elements and apply the same behavior to pseudo elements
+*/
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  /* change the box model, so borders and paddings are not added to the total width or height*/
-  box-sizing: border-box;
+  /* better practice. Force inheritance. By itself box-sizing is not inherited.
+  Tells each block element on the page to inherit body border-box properties.
+  This technique makes it easy to change box-sizing for plugins, etc */
+  box-sizing: inherit;
+}
+
+html {
+  /* set root font size */
+  /* em is much more difficult. It takes parent's element size to calculate sizes */
+  /* if I hardcode 10px, this becomes root size, and the users will not be able to override it.
+  The proper way is to use %. We know that the default browser font size is 16px. 
+  We want it 10px. 10 / 16 = 62.5%. This allows user to zoom in on the page  */
+  font-size: 62.5%;
 }
 
 body {
@@ -22,13 +37,15 @@ body {
     */
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  /* default for most browsers */
-  font-size: 16px;
 
   /* 1.7 times bigger than default */
   line-height: 1.7;
   color: #777;
-  padding: 30px;
+  padding: 3rem;
+
+  /* better practice to put this property on the body */
+  /* change the box model, so borders and paddings are not added to the total width or height*/
+  box-sizing: border-box;
 }
 
 .header {
@@ -56,19 +73,19 @@ body {
   position: relative;
 }
 
-.logo-box {
+.header__logo-box {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 4rem;
+  left: 4rem;
 }
 
-.logo {
+.header__logo {
   /* width will be automatically calculated by the browser if height if specified
     and vice versa */
-  height: 35px;
+  height: 3.5rem;
 }
 
-.text-box {
+.header__text-box {
   /* center the text */
   position: absolute;
   /* start text 50% from the parent element top (header is the element which has position: relative )*/
@@ -91,18 +108,18 @@ body {
   use this rule. This is the primary use for this rule. In this specific case it just helps with extra shake */
   backface-visibility: hidden;
 
-  margin-bottom: 60px;
+  margin-bottom: 6rem;
 }
 
-.heading-primary-main {
+.heading-primary--main {
   /* by default span is inline element 
        inline elements occupy only as much space as they need. Block elements occupy the entire width available and put 
        line breaks at the end
     */
   display: block;
-  font-size: 60px;
+  font-size: 6rem;
   font-weight: 400;
-  letter-spacing: 35px;
+  letter-spacing: 3.5rem;
   /* animation properties */
   animation-name: moveInLeft;
   animation-duration: 1s;
@@ -120,11 +137,11 @@ body {
   animation-timing-function: ease-out;
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
   display: block;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 17.4px;
+  letter-spacing: 1.74rem;
 
   animation-name: moveInRight;
   animation-duration: 1s;
@@ -134,13 +151,13 @@ body {
   /* when animation starts */
   0% {
     opacity: 0;
-    /* move it to the 100px to the left from current position */
-    transform: translateX(-100px);
+    /* move it to the 100rem to the left from current position */
+    transform: translateX(-10rem);
   }
 
   /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
   80% {
-    transform: translateX(10px);
+    transform: translateX(1rem);
   }
 
   /* when animation finishes */
@@ -155,13 +172,13 @@ body {
   /* when animation starts */
   0% {
     opacity: 0;
-    /* move it to the 100px to the left from current position */
-    transform: translateX(100px);
+    /* move it to the 10rem to the left from current position */
+    transform: translateX(10rem);
   }
 
   /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
   80% {
-    transform: translateX(-10px);
+    transform: translateX(-1rem);
   }
 
   /* when animation finishes */
@@ -176,13 +193,13 @@ body {
   /* when animation starts */
   0% {
     opacity: 0;
-    /* move it to the 100px to the left from current position */
-    transform: translateY(100px);
+    /* move it to the 10rem to the left from current position */
+    transform: translateY(10rem);
   }
 
   /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
   80% {
-    transform: translateY(-10px);
+    transform: translateY(-1rem);
   }
 
   /* when animation finishes */
@@ -197,13 +214,14 @@ body {
 .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 15px 40px;
+  font-size: 1.6rem;
+  padding: 1.5rem 4rem;
   /* need to be a block if we want to give inline element padding, height, width */
   display: inline-block;
   /* to center inline-block elements (they are treated as text) add text-align to the parent element*/
 
   /* make button with rounded edges */
-  border-radius: 100px;
+  border-radius: 10rem;
 
   /* use transition to animate. Use all properties for animation */
   /* transition property must be on the initial state, not on pseudo classes where it is visible */
@@ -218,23 +236,23 @@ body {
 
 .btn:hover {
   /* to move the button up (negative value) */
-  transform: translateY(-3px);
+  transform: translateY(-0.3rem);
 
   /* first arg is X, the second is Y, the third is blur value, fourth - color of the shadow and its opacity */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
   /* when we click an element, it becomes active.
   Move the element up 1px from initial position before any actions (0)
   */
-  transform: translateY(-1px);
+  transform: translateY(-0.1rem);
 
   /* when we click on the button we want the shadow to look smaller and less blured*/
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.btn--white {
   background-color: #fff;
   color: #777;
 }
@@ -250,7 +268,7 @@ body {
   /* 100% of the height and width of the button.  */
   height: 100%;
   width: 100%;
-  border-radius: 100px;
+  border-radius: 10rem;
   /* put the pseudo button right behind the main button, so it won't stick out. The parent should the .btn:link */
   position: absolute;
   top: 0;
@@ -265,7 +283,7 @@ body {
 }
 
 /* make the copied pseudo element white */
-.btn-white::after {
+.btn--white::after {
   background-color: #fff;
 }
 
@@ -279,7 +297,7 @@ body {
   opacity: 0;
 }
 
-.btn-animated {
+.btn--animated {
   /* .75s - delay */
   animation: moveInBottom 0.5s ease-out 0.75s;
 
