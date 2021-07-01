@@ -1,0 +1,44 @@
+.composition {
+  position: relative;
+  &__photo {
+    width: 55%;
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+    position: absolute;
+    // initially set all images with some default z-index
+    z-index: 10;
+    transform: all 0.2s;
+    // works together with outline on hover pseudo class
+    outline-offset: 2rem;
+
+    // create modifier class for each photo
+    &--p1 {
+      left: 0;
+      top: -2rem;
+    }
+
+    &--p2 {
+      right: 0;
+      top: 2rem;
+    }
+
+    &--p3 {
+      left: 20%;
+      top: 10rem;
+    }
+
+    &:hover {
+      // tworks together with outline-offset of the main element
+      outline: 1.5rem solid $color-primary;
+      // increase in size and move to the left
+      transform: scale(1.05) translateX(-0.5rem);
+      box-shadow: 0 2.5rem 4rem rgba($color-black, 0.5);
+      // bring the image to the front
+      z-index: 20;
+    }
+  }
+
+  //   make smaller photos which are not hovered
+  &:hover &__photo:not(:hover) {
+    transform: scale(0.95);
+  }
+}

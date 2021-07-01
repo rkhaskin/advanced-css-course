@@ -1,0 +1,50 @@
+.header {
+  /* 95% of the view port height */
+  height: 95vh;
+  /* technically, 2 images. radient at the top, hero at the bottom 
+  start gradient on the left top side and go to the right bottom
+  */
+  background-image: linear-gradient(
+      to right bottom,
+      /* make gradient transparent */ rgba($color-primary-light, 0.8),
+      rgba($color-primary-dark, 0.8)
+    ),
+    url(../img/hero.jpg);
+  /* fit the element inside of the box whatever the view port is */
+  background-size: cover;
+  /* if shrinking the image from bottom or the browser, the top portion stays in view if top is selected,
+  bottom portion stays in view if bottom is selected */
+  background-position: top;
+
+  /* specify four corners starting (x, y) top/left, top/right, etc 
+  https://bennettfeely.com/clippy/ - resources for different shapes
+  */
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  position: relative;
+
+  &__logo-box {
+    position: absolute;
+    top: 4rem;
+    left: 4rem;
+  }
+
+  &__logo {
+    /* width will be automatically calculated by the browser if height if specified
+      and vice versa */
+    height: 3.5rem;
+  }
+
+  &__text-box {
+    /* center the text */
+    position: absolute;
+    /* start text 50% from the parent element top (header is the element which has position: relative )*/
+    top: 40%;
+    /* start text 50% from the left from the parent element left*/
+    left: 50%;
+    /* after positioned as stated above, shift 50% to the top and left. relative to itself.
+    this concludes centering 
+    transform works relative to the element on which it is declared, not the parent */
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+}

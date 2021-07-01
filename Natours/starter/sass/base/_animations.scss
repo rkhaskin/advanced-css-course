@@ -1,0 +1,62 @@
+@keyframes moveInLeft {
+  /* when animation starts */
+  0% {
+    opacity: 0;
+    /* move it to the 100rem to the left from current position */
+    transform: translateX(-10rem);
+  }
+
+  /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
+  80% {
+    transform: translateX(1rem);
+  }
+
+  /* when animation finishes */
+  100% {
+    opacity: 1;
+    /* at the end show it the way it looks without animation*/
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInRight {
+  /* when animation starts */
+  0% {
+    opacity: 0;
+    /* move it to the 10rem to the left from current position */
+    transform: translateX(10rem);
+  }
+
+  /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
+  80% {
+    transform: translateX(-1rem);
+  }
+
+  /* when animation finishes */
+  100% {
+    opacity: 1;
+    /* at the end show it the way it looks without animation*/
+    transform: translateX(0);
+  }
+}
+
+@keyframes moveInBottom {
+  /* when animation starts */
+  0% {
+    opacity: 0;
+    /* move it to the 10rem to the left from current position */
+    transform: translateY(10rem);
+  }
+
+  /* before completing animation, shift it 10% to the right, then shift it to normal (0) when at 100%*/
+  80% {
+    transform: translateY(-1rem);
+  }
+
+  /* when animation finishes */
+  100% {
+    opacity: 1;
+    /* at the end show it the way it looks without animation*/
+    transform: translateY(0);
+  }
+}

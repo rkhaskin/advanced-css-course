@@ -1,0 +1,28 @@
+/* remove any browser inserted padding and margin
+automatically select all elements and all after and before pseudo elements and apply the same behavior to pseudo elements
+*/
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* better practice. Force inheritance. By itself box-sizing is not inherited.
+  Tells each block element on the page to inherit body border-box properties.
+  This technique makes it easy to change box-sizing for plugins, etc */
+  box-sizing: inherit;
+}
+
+html {
+  /* set root font size */
+  /* em is much more difficult. It takes parent's element size to calculate sizes */
+  /* if I hardcode 10px, this becomes root size, and the users will not be able to override it.
+  The proper way is to use %. We know that the default browser font size is 16px. 
+  We want it 10px. 10 / 16 = 62.5%. This allows user to zoom in on the page  */
+  font-size: 62.5%;
+}
+
+body {
+  /* better practice to put this property on the body */
+  /* change the box model, so borders and paddings are not added to the total width or height*/
+  box-sizing: border-box;
+}

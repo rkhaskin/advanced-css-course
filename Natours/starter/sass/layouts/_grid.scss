@@ -1,0 +1,61 @@
+.row {
+  /* if we have enough width, the specified width will be used
+    otherwise whatever view port, width is will be used */
+  max-width: $grid-width;
+  background-color: #eee;
+  /* center a block element inside another block element */
+  margin: 0 auto;
+
+  // set margin to all rows except last child
+  // :last-child represents the last element among a group of sibling elements.
+  &:not(:last-child) {
+    margin-bottom: $gutter-vertical;
+  }
+
+  // this will the row its complete height.
+  @include clearfix;
+
+  // attribute selector. Select attribute class which starts with col-
+  // [class*="col-] - select attr class which contains col-
+  // [class$="col-] - select attr class which ends with col-
+  [class^="col-"] {
+    // after we float, the entire row will have 0 height. All the child elements of this row float, so
+    // the height collapses. We need to use clearfix hack.
+    float: left;
+
+    &:not(:last-child) {
+      margin-right: $gutter-horizontal;
+    }
+  }
+
+  .col-1-of-2 {
+    // width of the col = (row.width - gutter) / 2
+    width: calc((100% - #{$gutter-horizontal}) / 2);
+  }
+
+  .col-1-of-3 {
+    width: calc((100% - #{$gutter-horizontal} * 2) / 3);
+  }
+
+  .col-2-of-3 {
+    width: calc(
+      2 * ((100% - 2 * #{$gutter-horizontal}) / 3) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-1-of-4 {
+    width: calc((100% - #{$gutter-horizontal} * 3) / 4);
+  }
+
+  .col-2-of-4 {
+    width: calc(
+      2 * ((100% - #{$gutter-horizontal} * 3) / 4) + #{$gutter-horizontal}
+    );
+  }
+
+  .col-3-of-4 {
+    width: calc(
+      3 * ((100% - #{$gutter-horizontal} * 3) / 4) + 2 * #{$gutter-horizontal}
+    );
+  }
+}
