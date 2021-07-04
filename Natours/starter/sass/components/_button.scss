@@ -62,6 +62,16 @@
     }
   }
 
+  &--green {
+    background-color: $color-primary;
+    color: $color-white;
+
+    /* make the copied pseudo element white */
+    &::after {
+      background-color: $color-white;
+    }
+  }
+
   /* after pseudo element is treated as a child of the button */
   &::after {
     /* create a copy of the button and put it behind the button.

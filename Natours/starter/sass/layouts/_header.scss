@@ -19,6 +19,7 @@
   /* specify four corners starting (x, y) top/left, top/right, etc 
   https://bennettfeely.com/clippy/ - resources for different shapes
   */
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
   position: relative;
 

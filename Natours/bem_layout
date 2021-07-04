@@ -1,0 +1,25 @@
+Block Element Modifier:
+
+.block {
+// standalone component, which can be reused anywhere on the project
+}
+
+.block__element {
+// part of the block, that does not have meaning on its own
+}
+
+block__element--modifier {
+  // different version of a block or an element
+}
+
+7:1 pattern: 7 different folders for partial SASS files and 1 main folder to import all other files
+    into a compiled css stylesheet
+
+7 Folders:
+base - basic project definitions
+components - one file per component
+layout - layouts of the project
+pages - styles for specific pages of the project
+themes - different visual themes
+abstracts - keep variables and mixins
+vendors - third party css

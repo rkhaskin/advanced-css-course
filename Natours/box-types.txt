@@ -1,0 +1,23 @@
+// produce block:
+display: block / flex / list-item / table
+
+block level box always occupies as much space as possible. Usuall 100% of it's parent width. Will also create line
+breaks before itself and after
+
+inline: only occupies content's space, no line breaks, no height and no width,
+        pading and margin only left and right
+
+inline-block: occupies only content space, no line breaks. Has all box model properties
+
+// positioning: normal flow, absolute positioning, floats
+
+normal flow: elements are laid out on the page in the natural order of the code.
+not normal flow: position: absolute and float. The rest are normal. Including position: relative
+
+floats: left or right. Element is removed from normal flow. Text and inline elements will wrap around the 
+        floated element. The container will not adjust its height to the element. Will need to clear.
+
+position: absolute or fixed. No impact on surounding elements. Use top, bottom, left, right to offset
+          the element from its relatively positioned container.
+
+stacking context: order of layering. Use z-index / opacity / transform          
