@@ -1,10 +1,11 @@
 .btn {
+  &, // add btn element itself
   /* button is a link, so it has link's pseudo selectors */
   &:link,
   &:visited {
     text-transform: uppercase;
     text-decoration: none;
-    font-size: 1.6rem;
+    font-size: $default-font-size;
     padding: 1.5rem 4rem;
     /* need to be a block if we want to give inline element padding, height, width */
     display: inline-block;
@@ -20,13 +21,14 @@
     /* set position relative to hide the btn::after element */
     position: relative;
 
-    /* move botton from bottom */
-    animation: moveInBottom 1s ease-out;
+    // change for the <button> element
+    border: none;
+    cursor: pointer;
   }
 
   &:hover {
     /* to move the button up (negative value) */
-    transform: translateY(-0.3rem);
+    transform: translateY(-3px);
 
     /* first arg is X, the second is Y, the third is blur value, fourth - color of the shadow and its opacity */
     box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
@@ -42,10 +44,12 @@
     }
   }
 
-  &:active {
+  &:active,
+  &:focus {
     /* when we click an element, it becomes active.
        Move the element up 1px from initial position before any actions (0)
   */
+    outline: none;
     transform: translateY(-0.1rem);
 
     /* when we click on the button we want the shadow to look smaller and less blured*/
@@ -66,9 +70,9 @@
     background-color: $color-primary;
     color: $color-white;
 
-    /* make the copied pseudo element white */
+    /* make the copied pseudo element with primary color */
     &::after {
-      background-color: $color-white;
+      background-color: $color-primary;
     }
   }
 

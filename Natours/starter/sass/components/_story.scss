@@ -1,0 +1,78 @@
+.story {
+  width: 75%;
+  // center block element
+  margin: 0 auto;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.1);
+  background-color: rgba($color-white, 0.6);
+  border-radius: 3px;
+  padding: 6rem;
+  padding-left: 9rem;
+  // paragraph will inherit this size
+  font-size: $default-font-size;
+  // skew all: background, image, text
+  transform: skewX(-12deg);
+
+  &__shape {
+    width: 15rem;
+    height: 15rem;
+    // to make the rest of the content to float around it
+    float: left;
+
+    // radius of the circle. 50% - half the height and the width of the element - 7.5rem
+    // radius is followed by position. We want the center
+    -webkit-shape-outside: circle(50% at 50% 50%);
+    shape-outside: circle(50% at 50% 50%);
+    webkit-clip-path: circle(50% at 50% 50%);
+    clip-path: circle(50% at 50% 50%);
+
+    // translateX(-3rem) gives margin, skewX(12deg) undoes skewX on story element for image
+    transform: translateX(-3rem) skewX(12deg);
+
+    position: relative;
+  }
+
+  &__img {
+    // flexible images for responsive web design must have width.
+    // width 100% is 15rem - width of the &__shape element. Image is inside the shape
+    height: 100%;
+    // move image a to the left to center the person on the image
+    transform: translateX(-4rem) scale(1.4);
+    backface-visibility: hidden;
+
+    // make image zoom in-out nicely
+    transition: all 0.5s;
+  }
+
+  &__text {
+    // undo story skewX for text
+    transform: skewX(12deg);
+  }
+
+  &__caption {
+    position: absolute;
+    // center relative to container, which is shape
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 20%);
+    color: $color-white;
+    text-transform: uppercase;
+    text-align: center;
+    font-size: 1.7rem;
+    // hide text at the beginning
+    opacity: 0;
+    transition: all 0.5s;
+    backface-visibility: hidden;
+  }
+
+  // as soon as hover happens on the story element, we want to change the caption
+  &:hover &__caption {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+
+  // when we hove over the story, we want to change image
+  &:hover &__img {
+    transform: translateX(-4rem) scale(1);
+    filter: blur(3px) brightness(80%);
+  }
+}
